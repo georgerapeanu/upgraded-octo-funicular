@@ -17,6 +17,7 @@ if __name__ == '__main__':
   
         try:
           f.write(content)
+          f.flush()
           print(content, end='')
         except:
           print(f'Error: Could not write to {path}.')
