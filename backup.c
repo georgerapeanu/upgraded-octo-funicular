@@ -23,11 +23,12 @@ int main(int argc, char** argv){
   }
   close(fd);
   renameat2(AT_FDCWD, argv[1], AT_FDCWD, tmp_file_name, RENAME_EXCHANGE);
-  char* cmd = (char*)malloc(30 + strlen(tmp_file_name) + strlen(argv[2]));
-  sprintf(cmd, "scp -i \"/.ssh/a2b_key\" %s %s", tmp_file_name, argv[2]);
+  char* cmd = (char*)malloc(40 + strlen(tmp_file_name) + strlen(argv[2]));
+  sprintf(cmd, "scp -i \"~/.ssh/a2b_key\" %s %s", tmp_file_name, argv[2]);
   system(cmd);
   unlink(tmp_file_name);
   free(tmp_file_name);
+  free(cmd);
 
   return 0;
 }
