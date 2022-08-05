@@ -6,6 +6,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <sys/stat.h>
+#include <time.h>
 
 int main(int argc, char** argv){
   if(argc != 3){
@@ -23,8 +24,15 @@ int main(int argc, char** argv){
   }
   close(fd);
   renameat2(AT_FDCWD, argv[1], AT_FDCWD, tmp_file_name, RENAME_EXCHANGE);
-  char* cmd = (char*)malloc(40 + strlen(tmp_file_name) + strlen(argv[2]));
-  sprintf(cmd, "scp -i \"~/.ssh/a2b_key\" %s %s", tmp_file_name, argv[2]);
+  char* cmd = (char*)malloc(100 + strlen(tmp_file_name) + strlen(argv[2]));
+
+  time_t rawtime;
+  struct tm * timeinfo;
+
+  time ( &rawtime );
+  timeinfo = localtime ( &rawtime );
+
+  sprintf(cmd, "scp -i \"~/.ssh/a2b_key\" %s %s-%s", tmp_file_name, argv[2], asctime (timeinfo));
   system(cmd);
   unlink(tmp_file_name);
   free(tmp_file_name);
