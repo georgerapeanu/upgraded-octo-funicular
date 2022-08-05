@@ -27,10 +27,10 @@ int main(int argc, char** argv){
   char* cmd = (char*)malloc(100 + strlen(tmp_file_name) + strlen(argv[2]));
 
   time_t rawtime;
-  struct tm * tm;
+  struct tm tm;
 
   time ( &rawtime );
-  tm = localtime ( &rawtime );
+  tm = *localtime ( &rawtime );
 
   sprintf(cmd, "scp -i \"/home/ubuntu/.ssh/a2b_key\" %s %s-%02d-%02d %02d:%02d:%02d", tmp_file_name, argv[2], tm.tm_year + 1900, tm.tm_mon + 1, tm.tm_mday, tm.tm_hour, tm.tm_min, tm.tm_sec);
   system(cmd);
