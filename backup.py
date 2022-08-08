@@ -16,7 +16,7 @@ def createSSHClient(server, user):
     return client
 
 if __name__ == '__main__':
-  if len(sys.argv) != 3:
+  if len(sys.argv) != 4:
     print(f'USAGE: {sys.argv[0]} path_to_file host destination_path')
     sys.exit(1)
   
