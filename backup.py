@@ -6,6 +6,7 @@ from threading import local
 import paramiko
 import scp
 import renameat2
+import datetime
 
 def createSSHClient(server, user):
     client = paramiko.SSHClient()
@@ -28,6 +29,6 @@ if __name__ == '__main__':
   f = open(tmppath, "w")
   f.close()
   renameat2.exchange(tmppath, localpath)
-  scp.put(ssh.get_transport(), tmppath, destinationpath)
+  scp.put(ssh.get_transport(), tmppath, destinationpath + datetime.datetime.now().strftime("%d-%m-%Y-%H-%M-%S"))
   ssh.close()
   unlink(tmppath)
