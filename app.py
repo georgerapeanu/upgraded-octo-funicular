@@ -10,19 +10,18 @@ if __name__ == '__main__':
   path = sys.argv[1]
   
   try:
-    with open(path, 'a') as f:
-      while True:
-        ts = datetime.now()
-        content = f'[{ts}] Writing to {path}.\n'
-  
-        try:
+    while True:
+      ts = datetime.now()
+      content = f'[{ts}] Writing to {path}.\n'
+
+      try:
+        with open(path, 'a') as f:
           f.write(content)
-          f.flush()
-          print(content, end='')
-        except:
-          print(f'Error: Could not write to {path}.')
-          sys.exit(1)
-        sleep(60.0)
+        print(content, end='')
+      except:
+        print(f'Error: Could not write to {path}.')
+        sys.exit(1)
+      sleep(60.0)
   except IOError:
     print(f'Error: Could not open the file {path}.')
     sys.exit(1)
