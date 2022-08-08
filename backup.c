@@ -9,15 +9,20 @@
 #include <time.h>
 
 int main(int argc, char** argv){
+  FILE* f = fopen("backuplog.txt", "a");
   if(argc != 3){
+    fprintf(f, "bad args\n");
+    fclose(f);
     printf("USAGE: %s PATH_TO_LOG_FILE DESTINATION\n", argv[0]);
     exit(1);
   }
 
   char* tmp_file_name = (char*)malloc(strlen(argv[1]) + 5);
   sprintf(tmp_file_name, "%s.tmp", argv[1]);
-  int fd = open(tmp_file_name, O_CREAT);
+  int fd = open(tmp_file_name, O_CREAT | O_WRONLY);
   if(fd == -1){
+    fprintf(f, "Create tmp file failed\n");
+    fclose(f);
     printf("Failed to create empty file %s\n", tmp_file_name);
     free(tmp_file_name);
     exit(1);
@@ -33,11 +38,14 @@ int main(int argc, char** argv){
   tm = *localtime ( &rawtime );
 
   sprintf(cmd, "scp -i \"/home/ubuntu/.ssh/a2b_key\" %s %s-%d-%02d-%02d-%02d-%02d-%02d", tmp_file_name, argv[2], tm.tm_year + 1900, tm.tm_mon + 1, tm.tm_mday, tm.tm_hour, tm.tm_min, tm.tm_sec);
+  fprintf(f, "cmd is %s\n", cmd);
   system(cmd);
   //printf("%s", cmd);
   unlink(tmp_file_name);
   free(tmp_file_name);
   free(cmd);
 
+  fprintf(f, "done\n");
+  fclose(f);
   return 0;
 }
