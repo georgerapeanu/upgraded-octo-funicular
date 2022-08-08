@@ -12,7 +12,7 @@ def createSSHClient(server, user):
     client = paramiko.SSHClient()
     client.load_system_host_keys()
     client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
-    client.connect(server, username=user, key_filename="~/.ssh/a2b_key")
+    client.connect(server, username=user, key_filename="/home/ubuntu/.ssh/a2b_key")
     return client
 
 if __name__ == '__main__':
