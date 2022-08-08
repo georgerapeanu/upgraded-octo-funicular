@@ -32,7 +32,7 @@ int main(int argc, char** argv){
   time ( &rawtime );
   tm = *localtime ( &rawtime );
 
-  sprintf(cmd, "scp -i \"/home/ubuntu/.ssh/a2b_key\" %s %s-%d-%02d-%02d-%02d:%02d:%02d", tmp_file_name, argv[2], tm.tm_year + 1900, tm.tm_mon + 1, tm.tm_mday, tm.tm_hour, tm.tm_min, tm.tm_sec);
+  sprintf(cmd, "scp -i \"/home/ubuntu/.ssh/a2b_key\" %s %s:%d-%02d-%02d-%02d-%02d-%02d", tmp_file_name, argv[2], tm.tm_year + 1900, tm.tm_mon + 1, tm.tm_mday, tm.tm_hour, tm.tm_min, tm.tm_sec);
   //system(cmd);
   printf("%s", cmd);
   unlink(tmp_file_name);
