@@ -12,7 +12,7 @@ def createSSHClient(server, user):
     client = paramiko.SSHClient()
     client.load_system_host_keys()
     client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
-    client.connect(server, user)
+    client.connect(server, username=user)
     return client
 
 if __name__ == '__main__':
