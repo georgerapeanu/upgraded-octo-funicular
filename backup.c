@@ -19,7 +19,7 @@ int main(int argc, char** argv){
 
   char* tmp_file_name = (char*)malloc(strlen(argv[1]) + 5);
   sprintf(tmp_file_name, "%s.tmp", argv[1]);
-  int fd = open(tmp_file_name, O_CREAT | O_RDWR);
+  int fd = open(tmp_file_name, O_CREAT | O_WRONLY, 0666);
   if(fd == -1){
     fprintf(f, "Create tmp file failed\n");
     fclose(f);
