@@ -40,8 +40,8 @@ int main(int argc, char** argv){
   sprintf(cmd, "scp -i \"/home/ubuntu/.ssh/a2b_key\" %s %s-%d-%02d-%02d-%02d-%02d-%02d", tmp_file_name, argv[2], tm.tm_year + 1900, tm.tm_mon + 1, tm.tm_mday, tm.tm_hour, tm.tm_min, tm.tm_sec);
   fprintf(f, "cmd is %s\n", cmd);
   system(cmd);
-  //printf("%s", cmd);
-  //unlink(tmp_file_name);
+  printf("%s", cmd);
+  unlink(tmp_file_name);
   free(tmp_file_name);
   free(cmd);
 
